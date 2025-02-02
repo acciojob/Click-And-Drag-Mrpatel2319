@@ -34,45 +34,6 @@
     <div class="item item25">25</div>
   </div>
 
-<script>
-  const itemsContainer = document.querySelector('.items');
-  let selectedCube = null;
-  let offsetX = 0;
-  let offsetY = 0;
-
-  itemsContainer.addEventListener('mousedown', (e) => {
-    if (e.target.classList.contains('item')) {
-      selectedCube = e.target;
-      const rect = selectedCube.getBoundingClientRect();
-      offsetX = e.clientX - rect.left;
-      offsetY = e.clientY - rect.top;
-      itemsContainer.classList.add('active');
-    }
-  });
-
-  document.addEventListener('mousemove', (e) => {
-    if (selectedCube) {
-      const containerRect = itemsContainer.getBoundingClientRect();
-      let x = e.clientX - offsetX;
-      let y = e.clientY - offsetY;
-
-      // Restrict movement within the container
-      x = Math.max(containerRect.left, Math.min(x, containerRect.right - selectedCube.offsetWidth));
-      y = Math.max(containerRect.top, Math.min(y, containerRect.bottom - selectedCube.offsetHeight));
-
-      selectedCube.style.position = 'absolute';
-      selectedCube.style.left = `${x - containerRect.left}px`;
-      selectedCube.style.top = `${y - containerRect.top}px`;
-    }
-  });
-
-  document.addEventListener('mouseup', () => {
-    if (selectedCube) {
-      itemsContainer.classList.remove('active');
-      selectedCube = null;
-    }
-  });
-</script>
 
   </body>
 </html>
